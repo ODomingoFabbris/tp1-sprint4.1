@@ -1,0 +1,19 @@
+<h2>Agregar un nuevo Superhéroe</h2>
+
+<% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+  <ul style="color:red;">
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<form action="/add-hero" method="POST">
+  <label for="name">Nombre del Superhéroe:</label>
+  <input type="text" id="name" name="name" value="<%= old?.name || '' %>" required>
+
+  <label for="power">Poder:</label>
+  <input type="text" id="power" name="power" value="<%= old?.power || '' %>" required>
+
+  <button type="submit">Agregar</button>
+</form>

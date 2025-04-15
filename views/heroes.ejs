@@ -1,0 +1,11 @@
+<h2>Lista de Superhéroes</h2>
+
+<% if (heroes.length > 0) { %>
+  <ul>
+    <% heroes.forEach(hero => { %>
+      <li><strong><%= hero.name %></strong> - <%= hero.power %></li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No hay superhéroes agregados aún.</p>
+<% } %>
