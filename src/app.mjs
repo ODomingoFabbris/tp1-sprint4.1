@@ -81,6 +81,6 @@ app.get('/heroes', async (req, res) => {
 app.use(expressLayouts);
 app.set('layout', 'layout'); // Usa views/layout.ejs como layout base
 
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Servidor se levanto en el puerto http://localhost:${port}`);
 });
