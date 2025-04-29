@@ -1,19 +1,47 @@
 <h2>Agregar un nuevo Superhéroe</h2>
 
-<% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+<!-- <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
   <ul style="color:red;">
     <% errors.forEach(error => { %>
       <li><%= error.msg %></li>
     <% }) %>
   </ul>
-<% } %>
+<% } %> -->
 
-<form action="/add-hero" method="POST">
+<!-- <form action="/add-hero" method="POST">
   <label for="name">Nombre del Superhéroe:</label>
   <input type="text" id="name" name="name" value="<%= old?.name || '' %>" required>
 
   <label for="power">Poder:</label>
   <input type="text" id="power" name="power" value="<%= old?.power || '' %>" required>
+
+  <button type="submit">Agregar</button>
+</form> -->
+
+<form action="/add-hero" method="POST">
+  <label for="nombreSuperHeroe">Nombre del Superhéroe:</label>
+  <input type="text" name="nombreSuperHeroe" required>
+
+  <label for="nombreReal">Nombre real:</label>
+  <input type="text" name="nombreReal" required>
+
+  <label for="edad">Edad:</label>
+  <input type="number" name="edad" required>
+
+  <label for="planetaOrigen">Planeta de origen:</label>
+  <input type="text" name="planetaOrigen" required>
+
+  <label for="debilidad">Debilidad:</label>
+  <input type="text" name="debilidad" required>
+
+  <label for="poderes">Poderes (separados por coma):</label>
+  <input type="text" name="poderes" placeholder="Vuelo, Invisibilidad">
+
+  <label for="aliados">Aliados (separados por coma):</label>
+  <input type="text" name="aliados" placeholder="Batman, Wonder Woman">
+
+  <label for="enemigos">Enemigos (separados por coma):</label>
+  <input type="text" name="enemigos" placeholder="Joker, Lex Luthor">
 
   <button type="submit">Agregar</button>
 </form>

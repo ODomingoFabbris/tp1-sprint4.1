@@ -1,4 +1,4 @@
-<h2>Lista de Superhéroes</h2>
+<!-- <h2>Lista de Superhéroes</h2>
 
 <% if (heroes.length > 0) { %>
   <ul>
@@ -9,3 +9,41 @@
 <% } else { %>
   <p>No hay superhéroes agregados aún.</p>
 <% } %>
+ -->
+ <h2>Lista de Superhéroes</h2>
+
+ <% if (heroes.length > 0) { %>
+   <ul>
+     <% heroes.forEach(hero => { %>
+       <li>
+         <strong>Superhéroe:</strong> <%= hero.nombreSuperHeroe %><br>
+         <strong>Nombre Real:</strong> <%= hero.nombreReal %><br>
+         <strong>Edad:</strong> <%= hero.edad %><br>
+         <strong>Planeta de Origen:</strong> <%= hero.planetaOrigen %><br>
+         <strong>Debilidad:</strong> <%= hero.debilidad %><br>
+         <strong>Poderes:</strong>
+         <ul>
+           <% hero.poderes.forEach(poder => { %>
+             <li><%= poder %></li>
+           <% }) %>
+         </ul>
+         <strong>Aliados:</strong>
+         <ul>
+           <% hero.aliados.forEach(aliado => { %>
+             <li><%= aliado %></li>
+           <% }) %>
+         </ul>
+         <strong>Enemigos:</strong>
+         <ul>
+           <% hero.enemigos.forEach(enemigo => { %>
+             <li><%= enemigo %></li>
+           <% }) %>
+         </ul>
+         <hr>
+       </li>
+     <% }) %>
+   </ul>
+ <% } else { %>
+   <p>No hay superhéroes agregados aún.</p>
+ <% } %>
+ 

@@ -25,9 +25,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 
-// Rutas principales
+/* // Rutas principales
 app.get('/', (req, res) => {
   res.render('index', { title: 'Página Principal' });
+}); */
+
+app.get('/', async (req, res) => {
+  const body = await ejs.renderFile(path.join(__dirname, 'views/index.ejs'));
+  res.render('layout', { body, title: 'Inicio' });
 });
 
 
@@ -57,8 +62,29 @@ app.post(
       return res.render('layout', { body, title: 'Agregar Superhéroe' });
     }
 
-    const { name, power } = req.body;
-    await Superhero.create({ name, power });
+/*     const { name, power } = req.body;
+    await Superhero.create({ name, power }); */
+    const {
+      nombreSuperHeroe,
+      nombreReal,
+      edad,
+      planetaOrigen,
+      debilidad,
+      poderes,
+      aliados,
+      enemigos
+    } = req.body;
+    
+    await Superhero.create({
+      nombreSuperHeroe,
+      nombreReal,
+      edad,
+      planetaOrigen,
+      debilidad,
+      poderes: poderes.split(',').map(p => p.trim()),
+      aliados: aliados.split(',').map(a => a.trim()),
+      enemigos: enemigos.split(',').map(e => e.trim())
+    });
     res.redirect('/heroes');
   }
 );
@@ -77,6 +103,17 @@ app.get('/heroes', async (req, res) => {
   });
   res.render('layout', { body, title: 'Lista de Superhéroes' });
 });
+
+app.get('/about', async (req, res) => {
+  const body = await ejs.renderFile(path.join(__dirname, 'views/about.ejs'));
+  res.render('layout', { body, title: 'Acerca de' });
+});
+
+app.get('/contact', async (req, res) => {
+  const body = await ejs.renderFile(path.join(__dirname, 'views/contact.ejs'));
+  res.render('layout', { body, title: 'Contacto' });
+});
+
 
 app.use(expressLayouts);
 app.set('layout', 'layout'); // Usa views/layout.ejs como layout base
