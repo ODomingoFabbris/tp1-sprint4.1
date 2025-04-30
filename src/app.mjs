@@ -48,8 +48,16 @@ app.get('/add-hero', async (req, res) => {
 app.post(
   '/add-hero',
   [
-    body('name').notEmpty().withMessage('El nombre es obligatorio'),
-    body('power').notEmpty().withMessage('El poder es obligatorio')
+    body('nombreSuperHeroe').notEmpty().withMessage('El nombre del superhéroe es obligatorio'),
+    body('nombreReal').notEmpty().withMessage('El nombre real es obligatorio'),
+    body('edad')
+      .notEmpty().withMessage('La edad es obligatoria')
+      .isNumeric().withMessage('La edad debe ser un número'),
+    body('planetaOrigen').notEmpty().withMessage('El planeta de origen es obligatorio'),
+    body('debilidad').notEmpty().withMessage('La debilidad es obligatoria'),
+    body('poderes').notEmpty().withMessage('Debe ingresar al menos un poder'),
+    body('aliados').notEmpty().withMessage('Debe ingresar al menos un aliado'),
+    body('enemigos').notEmpty().withMessage('Debe ingresar al menos un enemigo')
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -62,8 +70,6 @@ app.post(
       return res.render('layout', { body, title: 'Agregar Superhéroe' });
     }
 
-/*     const { name, power } = req.body;
-    await Superhero.create({ name, power }); */
     const {
       nombreSuperHeroe,
       nombreReal,
@@ -74,7 +80,7 @@ app.post(
       aliados,
       enemigos
     } = req.body;
-    
+
     await Superhero.create({
       nombreSuperHeroe,
       nombreReal,
@@ -85,9 +91,11 @@ app.post(
       aliados: aliados.split(',').map(a => a.trim()),
       enemigos: enemigos.split(',').map(e => e.trim())
     });
+
     res.redirect('/heroes');
   }
 );
+
 
 /*
 // En la ruta de index:
